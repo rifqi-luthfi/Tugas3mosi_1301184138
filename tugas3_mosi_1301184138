@@ -1,0 +1,37 @@
+import numpy as np
+import math
+
+import matplotlib.pyplot as plt
+
+def sample(i, N):
+    while i < 1000:
+        N.append(i)
+        i = i + 50
+        
+def linear(X):
+    return X
+
+X,Y = [],[]
+
+N = [15,50,100,115,150,200]
+sample(N[-1],N)
+
+def monte_carlo(a,b,func=linear):
+    for n in N:
+        x = np.random.uniform(a,b,n)
+        integral = (b-1)*np.mean(func(x))
+        X.append(n)
+        Y.append(integral)
+        n = n + 5
+        
+monte_carlo(1,3)
+
+M = [mean for M in range(len(X))]
+mean = np.mean(Y)
+
+
+plt.plot(X,Y,'*-g')
+plt.plot(X,M,'b')
+plt.xlabel('ukuran sampel, N')
+plt.ylabel('nilai integral')
+plt.plot()
